@@ -1,6 +1,6 @@
 resource "azurerm_resource_group" "rg" {
-  name     = "myTFResourceGroup"
-  location = "UK South"
+  name     = var.resource_group_name
+  location = var.resource_location
 
   tags = {
     Environment = "Terraform Getting Started"
@@ -11,8 +11,9 @@ resource "azurerm_resource_group" "rg" {
 
 # Create a virtual network
 resource "azurerm_virtual_network" "vnet" {
-  name                = "myTFVnet"
-  address_space       = ["10.0.0.0/16"]
-  location            = "UK South"
+  name                = var.azurerm_virtual_network
+  address_space       = ["${var.network_address}"]
+  location            = var.resource_location
   resource_group_name = azurerm_resource_group.rg.name
 }
+
